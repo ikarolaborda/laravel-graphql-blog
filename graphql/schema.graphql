@@ -22,20 +22,21 @@ type User {
     email: String!
     created_at: DateTime!
     updated_at: DateTime!
+    posts: [Post!]! @hasMany
 }
 
 type Topic {
     id: ID!
     name: String!
     slug: String!
-    posts: [Post!]!
+    posts: [Post!]! @hasMany
 
 }
 
 type Post {
     id: ID!
-    topic: Topic!
-    user: User!
+    topic: Topic! @belongsTo
+    user: User! @belongsTo
     title: String!
     content: String!
     lead: String!
