@@ -1,23 +1,19 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
+    <div class="container mx-auto">
+        <h1 class="text-indigo-700 uppercase">Post Lists</h1>
+        <hr class="divider">
+        <div>
+            <PostIndex></PostIndex>
         </div>
     </div>
-</template>
 
+</template>
 <script>
+    import PostIndex from "./posts/postIndex.vue";
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        components: {
+            PostIndex
         }
-    }
+    };
+
 </script>

@@ -9,9 +9,9 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
     <body>
-        <div class="flex-center position-ref full-height" id="app">
-
+        <div class="" id="app">
+            <router-view></router-view>
         </div>
-        <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>

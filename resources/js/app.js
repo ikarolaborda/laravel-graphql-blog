@@ -1,42 +1,50 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+import './bootstrap';
+import Vue, {createApp, onMounted} from "vue";
+import VueRouter from "vue-router";
+import {ApolloClient, InMemoryCache} from "apollo-boost";
+import { createHttpLink } from 'apollo-link-http'
+import VueApollo from "vue-apollo";
 
-require('./bootstrap');
+import ExampleComponent from "./components/ExampleComponent";
+import PostComponent from "./components/posts/postIndex";
 
-import {createApp, onMounted} from "vue";
-window.Vue = require('vue');
+window.Vue = Vue;
+Vue.use(VueRouter);
+Vue.use(VueApollo);
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = createApp({
-    data() {
-        return {
-            message: 'Hello Vue!'
-        }
+const routes = [
+    {
+        path: '/',
+        name: 'home',
+        component: ExampleComponent
+    },
+    {
+        path: '/post/:id',
+        name: 'post',
+        component: PostComponent
     }
+];
 
+const router = new VueRouter({
+    mode: 'history',
+    routes
 });
-app.component('example-component', {
-    template: `<h1>Hello World</h1>`
+
+const apolloClient = new ApolloClient({
+    uri: 'http://localhost/graphql',
+    cache: new InMemoryCache(),
+    link: createHttpLink({
+        uri: 'http://localhost/graphql',
+    })
 });
-app.mount('#app');
+
+const apolloProvider = new VueApollo({
+   defaultClient: apolloClient
+});
+
+
+
+const app = new Vue({
+    router,
+    apolloProvider,
+}).$mount('#app');
