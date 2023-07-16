@@ -7,6 +7,7 @@ import VueApollo from "vue-apollo";
 
 import ExampleComponent from "./components/ExampleComponent";
 import PostComponent from "./components/posts/postIndex";
+import Post from "./components/posts/Post.vue";
 
 window.Vue = Vue;
 Vue.use(VueRouter);
@@ -21,7 +22,7 @@ const routes = [
     {
         path: '/post/:id',
         name: 'post',
-        component: PostComponent
+        component: Post
     }
 ];
 

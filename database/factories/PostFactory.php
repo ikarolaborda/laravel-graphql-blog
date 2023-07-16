@@ -1,17 +1,22 @@
 <?php
 
-/** @var Factory $factory */
+namespace Database\Factories;
 
-use App\Post;
-use Faker\Generator as Faker;
-use Illuminate\Database\Eloquent\Factory;
+use App\Models\Post;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Post::class, function (Faker $faker) {
-    return [
-        'title' => $faker->sentence(5),
-        'content' => $faker->paragraph(10),
-        'lead' => $faker->paragraph(2),
-        'topic_id' => rand(1, 6),
-        'user_id' => rand(1, 20),
-    ];
-});
+class PostFactory extends Factory
+{
+    protected $model = Post::class;
+
+    public function definition(): array
+    {
+        return [
+            'title' => $this->faker->sentence(5),
+            'content' => $this->faker->paragraph(10),
+            'lead' => $this->faker->paragraph(2),
+            'topic_id' => rand(1, 6),
+            'user_id' => rand(1, 20),
+        ];
+    }
+}
